@@ -1,3 +1,6 @@
+.DS_Store
+.idea/
+node_modules/
 * text eol=lf
 
 *.png binary
@@ -6,3 +9,4 @@
 *.webp binary
 *.woff binary
 *.woff2 binary
+node_modules

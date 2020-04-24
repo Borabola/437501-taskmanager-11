@@ -1,8 +1,7 @@
 import {MONTH_NAMES} from "../const.js";
-import {formatTime} from "../utils.js";
+import {createElement, formatTime} from "../utils.js";
 
-
-export const createTaskTemplate = (task) => {
+const createTaskTemplate = (task) => {
   const {description, dueDate, color, repeatingDays, isArchive, isFavorite} = task;
 
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
@@ -28,8 +27,7 @@ export const createTaskTemplate = (task) => {
           </button>
           <button
             type="button"
-            class="card__btn card__btn--favorites ${favoriteButtonInactiveClass}"
-          >
+            class="card__btn card__btn--favorites ${favoriteButtonInactiveClass}">
             favorites
           </button>
         </div>
@@ -57,3 +55,27 @@ export const createTaskTemplate = (task) => {
     </div>
   </article>`;
 };
+
+export default class Task {
+  constructor(task) {
+    this._task = task;
+
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createTaskTemplate(this._task);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
